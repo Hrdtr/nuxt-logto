@@ -1,0 +1,47 @@
+{
+  "name": "nuxt-logto",
+  "version": "1.0.0",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepack": "nuxt-module-build",
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build --stub && nuxi prepare playground",
+    "release": "release-it"
+  },
+  "dependencies": {
+    "@logto/client": "1.0.0-beta.13",
+    "@nuxt/kit": "^3.0.0"
+  },
+  "devDependencies": {
+    "@nuxt/module-builder": "^0.2.1",
+    "@nuxt/schema": "^3.0.0",
+    "@nuxtjs/eslint-config-typescript": "^12.0.0",
+    "@release-it/conventional-changelog": "^5.1.1",
+    "@types/node": "^18.11.9",
+    "@vue/runtime-core": "^3.2.45",
+    "eslint": "^8.27.0",
+    "js-base64": "^3.7.3",
+    "nuxt": "^3.0.0",
+    "release-it": "^15.5.0",
+    "typescript": "^4.9.3",
+    "vue": "^3.2.45"
+  },
+  "pnpm": {
+    "overrides": {
+      "@logto/core-kit@1.0.0-beta.20": "1.0.0-beta.25"
+    }
+  }
+}
