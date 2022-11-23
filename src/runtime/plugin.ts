@@ -2,10 +2,10 @@
 import { defineNuxtPlugin, useCookie } from '#app'
 import { readonly } from 'vue'
 import { Storage } from '@logto/client'
-import { Context, createContext } from '../context'
-import { createPluginMethods } from '../methods'
-import { Logto } from '..'
-import LogtoClient from '../client'
+import { Context, createContext } from './context'
+import { createPluginMethods } from './methods'
+import LogtoClient from './client'
+import { Logto } from '.'
 
 export default defineNuxtPlugin((nuxtApp) => {
   const logtoConfig = nuxtApp.$config.public.logto.config
