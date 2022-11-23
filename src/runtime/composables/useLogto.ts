@@ -1,4 +1,5 @@
 import { useNuxtApp } from '#app'
+import { Logto } from '..'
 
 /**
  * A composable method that provides the Logto reactive refs and auth methods.
@@ -20,7 +21,7 @@ import { useNuxtApp } from '#app'
  *
  * Use this composable in the setup script of your Vue component to make sure the injection works
  */
-export const useLogto = () => {
+export const useLogto = (): Logto => {
   const { $logto } = useNuxtApp()
   const { plugin } = $logto
 

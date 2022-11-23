@@ -1,11 +1,15 @@
-import { readonly } from 'vue'
+import { readonly, Ref } from 'vue'
 import { useNuxtApp, useRequestHeaders, useRequestEvent } from '#app'
 
 /**
  * A composable method that watches browser navigation and automatically handles the sign-in callback
  * Use this in the setup script of your Callback page to make sure the injection works
  */
-export const useHandleSignInCallback = (callback?: () => void) => {
+export const useHandleSignInCallback = (callback?: () => void): {
+  isLoading: Readonly<Ref<boolean>>;
+  isAuthenticated: Readonly<Ref<boolean>>;
+  error: Readonly<Ref<Error | undefined>>;
+} => {
   const { $logto } = useNuxtApp()
   const { context, createPluginMethods } = $logto
 
