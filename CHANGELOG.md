@@ -1,5 +1,12 @@
 
 
+### [1.0.3](https://github.com/Hrdtr/nuxt-logto/compare/1.0.2...1.0.3) (2022-11-24)
+
+
+### Bug Fixes
+
+* include @logto/core-kit, @logto/js and js-base64 to dependency list ([2adc1e3](https://github.com/Hrdtr/nuxt-logto/commit/2adc1e3f2a9ef64a976cde9d71898d785689fdf8))
+
 ### [1.0.2](https://github.com/Hrdtr/nuxt-logto/compare/1.0.1...1.0.2) (2022-11-24)
 
 
