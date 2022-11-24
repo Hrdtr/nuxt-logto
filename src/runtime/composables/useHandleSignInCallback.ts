@@ -1,4 +1,4 @@
-import { readonly, Ref } from 'vue'
+import { readonly, Ref, watchEffect } from 'vue'
 import { useNuxtApp, useRequestHeaders, useRequestEvent } from '#app'
 
 /**
@@ -33,6 +33,8 @@ export const useHandleSignInCallback = (callback?: () => void): {
   if (!isAuthenticated.value && logtoClient.value?.isSignInRedirected(currentPageUrl)) {
     handleSignInCallback(currentPageUrl, callback)
   }
+  // watchEffect(() => {
+  // })
 
   return {
     isLoading: readonly(isLoading),

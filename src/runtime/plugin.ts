@@ -1,7 +1,6 @@
 /* eslint-disable require-await */
 import { defineNuxtPlugin, useCookie } from '#app'
 import { readonly } from 'vue'
-import { Storage } from '@logto/client'
 import { Context, createContext } from './context'
 import { createPluginMethods } from './methods'
 import LogtoClient from './client'
@@ -10,66 +9,36 @@ import { Logto } from '.'
 export default defineNuxtPlugin((nuxtApp) => {
   const logtoConfig = nuxtApp.$config.public.logto.config
 
-  interface AuthStorage {
-    idToken: string | null
-    refreshToken: string | null
-    accessToken: string | null
-    signInSession: string | null
-  }
-
-  const idToken = useCookie<string | null>('logto:idToken', { default: () => null })
-  const refreshToken = useCookie<string | null>('logto:refreshToken', { default: () => null })
-  const accessToken = useCookie<string | null>('logto:accessToken', { default: () => null })
-  const signInSession = useCookie<string | null>('logto:signInSession', { default: () => null })
-
-  const cookieStorage = {
-    idToken,
-    refreshToken,
-    accessToken,
-    signInSession
-  }
-
   const localStorageAvailable = process.client && !!localStorage
   const storage = {
-    set: (key: keyof AuthStorage, value: string) => {
-      cookieStorage[key].value = value
+    setItem: async (key: string, value: string) => {
+      const cookie = useCookie(`logto:${key}`)
+      cookie.value = value
       if (localStorageAvailable) {
         localStorage.setItem(`logto:${key}`, value)
       }
     },
-    get: (key: keyof AuthStorage) => {
-      if (cookieStorage[key].value) {
-        return JSON.stringify(cookieStorage[key].value)
-      }
-      if (localStorageAvailable) {
+    getItem: async (key: string) => {
+      const cookie = useCookie(`logto:${key}`)
+      if (cookie.value) {
+        if (key === 'refreshToken' || key === 'idToken') { return cookie.value }
+        return JSON.stringify(cookie.value)
+      } else if (localStorageAvailable) {
         return localStorage.getItem(`logto:${key}`)
       } else {
         return null
       }
     },
-    delete: (key: keyof AuthStorage) => {
-      cookieStorage[key].value = null
+    removeItem: async (key: string) => {
+      const cookie = useCookie(`logto:${key}`)
+      cookie.value = null
       if (localStorageAvailable) {
-        localStorage.getItem(`logto:${key}`)
+        localStorage.removeItem(`logto:${key}`)
       }
     }
   }
 
-  class LogtoStorage implements Storage {
-    async getItem (key: keyof AuthStorage): Promise<string | null> {
-      return storage.get(key)
-    }
-
-    async setItem (key: keyof AuthStorage, value: string): Promise<void> {
-      storage.set(key, value)
-    }
-
-    async removeItem (key: keyof AuthStorage): Promise<void> {
-      storage.delete(key)
-    }
-  }
-
-  const client = new LogtoClient(logtoConfig, new LogtoStorage())
+  const client = new LogtoClient(logtoConfig, storage)
   const context = createContext(client)
   const pluginMethods = createPluginMethods(context)
   const { isAuthenticated, isLoading, error } = context
