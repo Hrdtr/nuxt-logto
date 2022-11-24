@@ -1,12 +1,12 @@
 /* eslint-disable require-await */
-import { defineNuxtPlugin, useCookie } from '#app'
+import { defineNuxtPlugin, Plugin, useCookie } from '#app'
 import { readonly } from 'vue'
 import { Context, createContext } from './context'
 import { createPluginMethods } from './methods'
 import LogtoClient from './client'
 import { Logto } from '.'
 
-export default defineNuxtPlugin((nuxtApp) => {
+export default defineNuxtPlugin(((nuxtApp) => {
   const logtoConfig = nuxtApp.$config.public.logto.config
 
   const cookieStorage = {
@@ -56,6 +56,7 @@ export default defineNuxtPlugin((nuxtApp) => {
     error: readonly(error),
     ...pluginMethods
   }
+
   return {
     provide: {
       logto: {
@@ -65,7 +66,13 @@ export default defineNuxtPlugin((nuxtApp) => {
       }
     }
   }
-})
+}) as Plugin<{
+  logto: {
+    context: Context;
+    plugin: Logto,
+    createPluginMethods: typeof createPluginMethods
+  }
+}>)
 
 declare module '#app' {
   interface NuxtApp {

@@ -23,11 +23,9 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     nuxt.options.runtimeConfig.public.logto = options
-
     nuxt.options.build.transpile.push(runtimeDir, /@logto/, /@silverhand/)
+
     addImportsDir(resolve(runtimeDir, 'composables'))
-    nuxt.hook('ready', () => {
-      addPlugin(resolve(runtimeDir, 'plugin'))
-    })
+    addPlugin(resolve(runtimeDir, 'plugin'))
   }
 })
