@@ -48,14 +48,18 @@ onMounted(async () => {
 
 /* SSR */
 const { data } = useLazyAsyncData(async () => {
-  const user = await fetchUserInfo()
-  return user
+  if (isAuthenticated.value) {
+    const user = await fetchUserInfo()
+    return user
+  }
 })
 
 /* Client */
 // const data = ref()
 // onMounted(async () => {
-//   const user = await fetchUserInfo()
-//   data.value = user
+//   if (isAuthenticated) {
+//     const user = await fetchUserInfo()
+//     data.value = user
+//   }
 // })
 </script>

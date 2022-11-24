@@ -9,17 +9,24 @@ import { Logto } from '.'
 export default defineNuxtPlugin((nuxtApp) => {
   const logtoConfig = nuxtApp.$config.public.logto.config
 
+  const cookieStorage = {
+    idToken: useCookie('logto:idToken'),
+    refreshToken: useCookie('logto:refreshToken'),
+    accessToken: useCookie('logto:accessToken'),
+    signInSession: useCookie('logto:signInSession')
+  }
+
   const localStorageAvailable = process.client && !!localStorage
   const storage = {
-    setItem: async (key: string, value: string) => {
-      const cookie = useCookie(`logto:${key}`)
+    setItem: async (key: keyof typeof cookieStorage, value: string) => {
+      const cookie = cookieStorage[key]
       cookie.value = value
       if (localStorageAvailable) {
         localStorage.setItem(`logto:${key}`, value)
       }
     },
-    getItem: async (key: string) => {
-      const cookie = useCookie(`logto:${key}`)
+    getItem: async (key: keyof typeof cookieStorage) => {
+      const cookie = cookieStorage[key]
       if (cookie.value) {
         if (key === 'refreshToken' || key === 'idToken') { return cookie.value }
         return JSON.stringify(cookie.value)
@@ -29,8 +36,8 @@ export default defineNuxtPlugin((nuxtApp) => {
         return null
       }
     },
-    removeItem: async (key: string) => {
-      const cookie = useCookie(`logto:${key}`)
+    removeItem: async (key: keyof typeof cookieStorage) => {
+      const cookie = cookieStorage[key]
       cookie.value = null
       if (localStorageAvailable) {
         localStorage.removeItem(`logto:${key}`)

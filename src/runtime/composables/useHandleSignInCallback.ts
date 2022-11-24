@@ -30,11 +30,11 @@ export const useHandleSignInCallback = (callback?: () => void): {
     currentPageUrl = window?.location?.href
   }
 
-  if (!isAuthenticated.value && logtoClient.value?.isSignInRedirected(currentPageUrl)) {
-    handleSignInCallback(currentPageUrl, callback)
-  }
-  // watchEffect(() => {
-  // })
+  watchEffect(() => {
+    if (!isAuthenticated.value && logtoClient.value?.isSignInRedirected(currentPageUrl)) {
+      handleSignInCallback(currentPageUrl, callback)
+    }
+  })
 
   return {
     isLoading: readonly(isLoading),
