@@ -1,5 +1,12 @@
 
 
+### [1.0.4](https://github.com/Hrdtr/nuxt-logto/compare/1.0.3...1.0.4) (2022-11-24)
+
+
+### Bug Fixes
+
+* add  and  to vite optimizedeps array ([1987e71](https://github.com/Hrdtr/nuxt-logto/commit/1987e711320d6cbe5e4db167443a90ea4277d77f))
+
 ### [1.0.3](https://github.com/Hrdtr/nuxt-logto/compare/1.0.2...1.0.3) (2022-11-24)
 
 
