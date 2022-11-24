@@ -23,7 +23,10 @@
   },
   "dependencies": {
     "@logto/client": "1.0.0-beta.13",
-    "@nuxt/kit": "^3.0.0"
+    "@logto/core-kit": "1.0.0-beta.26",
+    "@logto/js": "1.0.0-beta.13",
+    "@nuxt/kit": "^3.0.0",
+    "js-base64": "^3.7.3"
   },
   "devDependencies": {
     "@nuxt/module-builder": "^0.2.1",
@@ -33,7 +36,6 @@
     "@types/node": "^18.11.9",
     "@vue/runtime-core": "^3.2.45",
     "eslint": "^8.27.0",
-    "js-base64": "^3.7.3",
     "nuxt": "^3.0.0",
     "release-it": "^15.5.0",
     "typescript": "^4.9.3",
@@ -41,7 +43,7 @@
   },
   "pnpm": {
     "overrides": {
-      "@logto/core-kit@1.0.0-beta.20": "1.0.0-beta.25"
+      "@logto/core-kit@1.0.0-beta.20": "1.0.0-beta.26"
     }
   }
 }
