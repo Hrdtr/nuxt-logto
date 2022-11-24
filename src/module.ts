@@ -24,6 +24,12 @@ export default defineNuxtModule<ModuleOptions>({
 
     nuxt.options.runtimeConfig.public.logto = options
     nuxt.options.build.transpile.push(runtimeDir, /@logto/, /@silverhand/)
+    if (nuxt.options.vite.optimizeDeps?.include) {
+      nuxt.options.vite.optimizeDeps.include.push('@logto/core-kit')
+      nuxt.options.vite.optimizeDeps.include.push('@logto/client')
+    } else {
+      nuxt.options.vite.optimizeDeps = { ...(nuxt.options.vite.optimizeDeps || {}), include: ['@logto/core-kit', '@logto/client'] }
+    }
 
     addImportsDir(resolve(runtimeDir, 'composables'))
     addPlugin(resolve(runtimeDir, 'plugin'))
