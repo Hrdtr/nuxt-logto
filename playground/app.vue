@@ -4,7 +4,7 @@
       Redirecting...
     </template>
     <template v-else>
-      <button @click="signIn('http://localhost:3000/?redirect=true')">
+      <button v-if="isAuthenticated" @click="signIn('http://localhost:3000/?redirect=true')">
         Sign In
       </button>
       <div>
@@ -16,7 +16,7 @@
       <div v-if="isAuthenticated">
         user: <pre>{{ JSON.stringify(data, null, 2) }}</pre>
       </div>
-      <button v-if="isAuthenticated" @click="signOut('http://localhost:3000/?postlogout=true')">
+      <button v-if="isAuthenticated" @click="signOut('http://localhost:3000/?postsignout=true')">
         Sign Out
       </button>
     </template>
