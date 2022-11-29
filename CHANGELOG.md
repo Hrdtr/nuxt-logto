@@ -1,5 +1,12 @@
 
 
+### [1.0.5](https://github.com/Hrdtr/nuxt-logto/compare/1.0.4...1.0.5) (2022-11-29)
+
+
+### Bug Fixes
+
+* ssr initial auth state ([4316552](https://github.com/Hrdtr/nuxt-logto/commit/4316552c28848d501d011b297d1abac777aa8b53))
+
 ### [1.0.4](https://github.com/Hrdtr/nuxt-logto/compare/1.0.3...1.0.4) (2022-11-24)
 
 
