@@ -1,5 +1,12 @@
 
 
+### [1.0.6](https://github.com/Hrdtr/nuxt-logto/compare/1.0.5...1.0.6) (2022-11-29)
+
+
+### Bug Fixes
+
+* add prefix to plugin filename so can be loaded earlier ([c8dfc56](https://github.com/Hrdtr/nuxt-logto/commit/c8dfc5656afa9982851f75229da6440070f153bb))
+
 ### [1.0.5](https://github.com/Hrdtr/nuxt-logto/compare/1.0.4...1.0.5) (2022-11-29)
 
 
