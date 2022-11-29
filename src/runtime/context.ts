@@ -41,7 +41,7 @@ export const createContext = (client: LogtoClient): Context => {
     } else if (fallbackErrorMessage) {
       error.value = new Error(fallbackErrorMessage)
     }
-    console.error(error)
+    console.error(error.value)
   }
 
   const setLoading = (isLoading: boolean) => {
