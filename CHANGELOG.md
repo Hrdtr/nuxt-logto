@@ -1,3 +1,12 @@
+
+
+### [1.0.8](https://github.com/Hrdtr/nuxt-logto/compare/1.0.7...1.0.8) (2022-12-26)
+
+
+### Bug Fixes
+
+* get initial state asynchronously with workaround ([e6e8db4](https://github.com/Hrdtr/nuxt-logto/commit/e6e8db4e15dfea0fb5c88c1ca6eab8e38c7ebbef))
+
 ### [1.0.7](https://github.com/Hrdtr/nuxt-logto/compare/1.0.6...1.0.7) (2022-12-26)
 
 *   add auth state initialization on app:created hook
