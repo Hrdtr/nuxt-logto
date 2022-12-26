@@ -6,8 +6,8 @@ export default defineNuxtConfig({
   modules: [logto],
   logto: {
     config: {
-      endpoint: 'https://identity.amcollective.xyz',
-      appId: 'Q48NbEybF9OgsHWAFqgc8'
+      endpoint: '',
+      appId: ''
     }
   }
 })
