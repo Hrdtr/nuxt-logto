@@ -13,16 +13,17 @@ export {
   UserScope
 } from '@logto/client'
 
+export type Navigator = (url: string) => void | Promise<void>
 const navigate = (url: string) => {
   window.location.assign(url)
 }
 
 export default class LogtoClient extends BaseClient {
-  constructor (config: LogtoConfig, storage: Storage) {
+  constructor (config: LogtoConfig, storage: Storage, navigator: Navigator = navigate) {
     const requester = createRequester(fetch)
     super(config, {
       requester,
-      navigate,
+      navigate: navigator,
       storage,
       generateCodeChallenge,
       generateCodeVerifier,

@@ -11,27 +11,20 @@ export const useHandleSignInCallback = (callback?: () => void): {
   error: Readonly<Ref<Error | undefined>>;
 } => {
   const { $logto } = useNuxtApp()
-  const { context, createPluginMethods } = $logto
-
-  if (!context) {
-    throw new Error('Logto context not accessible.')
-  }
-
-  const { isAuthenticated, isLoading, logtoClient, error } = context
-  const { handleSignInCallback } = createPluginMethods(context)
+  const { isAuthenticated, client, isLoading, error, handleSignInCallback } = $logto
 
   let currentPageUrl: string
   if (process.server) {
     const headers = useRequestHeaders()
     const host = headers.host as string
-    const protocol = headers?.referer?.split('/')?.[0]
-    currentPageUrl = protocol ? `${protocol}//${host}${useRequestEvent().node.req.url}` : `https://${host}${useRequestEvent().node.req.url}`
+    const protocol = headers?.referer?.split('/')?.[0] || 'https:'
+    currentPageUrl = `${protocol}//${host}${useRequestEvent().node.req.url}`
   } else {
     currentPageUrl = window?.location?.href
   }
 
   watchEffect(() => {
-    if (!isAuthenticated.value && logtoClient.value?.isSignInRedirected(currentPageUrl)) {
+    if (!isAuthenticated.value && client.value?.isSignInRedirected(currentPageUrl)) {
       handleSignInCallback(currentPageUrl, callback)
     }
   })

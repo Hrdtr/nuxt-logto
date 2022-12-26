@@ -4,7 +4,7 @@
       Redirecting...
     </template>
     <template v-else>
-      <button v-if="isAuthenticated" @click="signIn('http://localhost:3000/?redirect=true')">
+      <button v-if="!isAuthenticated" @click="signIn('http://localhost:3000/?redirect=true')">
         Sign In
       </button>
       <div>

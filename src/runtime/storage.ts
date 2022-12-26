@@ -1,14 +1,7 @@
 /* eslint-disable require-await */
-import { defineNuxtPlugin, Plugin, useCookie } from '#app'
-import { readonly } from 'vue'
-import { Context, createContext } from './context'
-import { createPluginMethods } from './methods'
-import LogtoClient from './client'
-import { Logto } from '.'
+import { useCookie } from '#app'
 
-export default defineNuxtPlugin(((nuxtApp) => {
-  const logtoConfig = nuxtApp.$config.public.logto.config
-
+export const createStorage = () => {
   const idToken = useCookie('logto:idToken')
   const refreshToken = useCookie('logto:refreshToken')
   const accessToken = useCookie('logto:accessToken')
@@ -76,53 +69,5 @@ export default defineNuxtPlugin(((nuxtApp) => {
     }
   }
 
-  const client = new LogtoClient(logtoConfig, storage)
-  const context = createContext(client)
-  const { isAuthenticated, isLoading, error } = context
-  client.isAuthenticated().then((res) => {
-    isAuthenticated.value = res
-  })
-  const pluginMethods = createPluginMethods(context)
-
-  const plugin: Logto = {
-    isAuthenticated: readonly(isAuthenticated),
-    isLoading: readonly(isLoading),
-    error: readonly(error),
-    ...pluginMethods
-  }
-
-  return {
-    provide: {
-      logto: {
-        context,
-        plugin,
-        createPluginMethods
-      }
-    }
-  }
-}) as Plugin<{
-  logto: {
-    context: Context;
-    plugin: Logto,
-    createPluginMethods: typeof createPluginMethods
-  }
-}>)
-
-declare module '#app' {
-  interface NuxtApp {
-      $logto: {
-        context: Context;
-        plugin: Logto,
-        createPluginMethods: typeof createPluginMethods
-      }
-  }
-}
-declare module '@vue/runtime-core' {
-  interface ComponentCustomProperties {
-    $logto: {
-      context: Context;
-      plugin: Logto,
-      createPluginMethods: typeof createPluginMethods
-    }
-  }
+  return storage
 }

@@ -1,5 +1,5 @@
-import { useNuxtApp } from '#app'
 import { Logto } from '..'
+import { useNuxtApp } from '#app'
 
 /**
  * A composable method that provides the Logto reactive refs and auth methods.
@@ -23,11 +23,7 @@ import { Logto } from '..'
  */
 export const useLogto = (): Logto => {
   const { $logto } = useNuxtApp()
-  const { plugin } = $logto
+  if (!$logto) { throw new Error('Logto plugin not accessible') }
 
-  if (!plugin) {
-    throw new Error('Logto plugin not accessible.')
-  }
-
-  return plugin
+  return $logto
 }

@@ -1,71 +1,36 @@
-import type { ComputedRef, Ref, UnwrapRef } from 'vue'
-import { computed, reactive, toRefs, watchEffect } from 'vue'
+import type { Ref, UnwrapRef } from 'vue'
+import { reactive, toRefs } from 'vue'
 import type LogtoClient from './client'
 
 interface LogtoContextProperties {
-  logtoClient: LogtoClient | undefined
+  client: LogtoClient | undefined
   isAuthenticated: boolean
-  loadingCount: number
+  isLoading: boolean
   error: Error | undefined
 }
 
 export interface Context {
   // Wrong type workaround. https://github.com/vuejs/core/issues/2981
-  logtoClient: Ref<UnwrapRef<LogtoClient | undefined>>
+  client: Ref<UnwrapRef<LogtoClient | undefined>>
   isAuthenticated: Ref<boolean>
-  loadingCount: Ref<number>
+  isLoading: Ref<boolean>
   error: Ref<Error | undefined>
-  isLoading: ComputedRef<boolean>
-  setError: (error: unknown, fallbackErrorMessage?: string | undefined) => void
-  setIsAuthenticated: (isAuthenticated: boolean) => void
-  setLoading: (isLoading: boolean) => void
 }
 
-export const createContext = (client: LogtoClient): Context => {
-  const context = toRefs(
-    reactive<LogtoContextProperties>({
-      logtoClient: client,
-      isAuthenticated: false,
-      loadingCount: 1,
-      error: undefined
-    })
-  )
-
-  const { isAuthenticated, loadingCount, error } = context
-
-  const isLoading = computed(() => loadingCount.value > 0)
-
-  const setError = (_error: unknown, fallbackErrorMessage?: string) => {
-    if (_error instanceof Error) {
-      error.value = _error
-    } else if (fallbackErrorMessage) {
-      error.value = new Error(fallbackErrorMessage)
-    }
-    console.error(error.value)
-  }
-
-  const setLoading = (isLoading: boolean) => {
-    if (isLoading) {
-      loadingCount.value += 1
-    } else {
-      loadingCount.value = Math.max(0, loadingCount.value - 1)
-    }
-  }
-
-  const setIsAuthenticated = (_isAuthenticated: boolean) => {
-    isAuthenticated.value = _isAuthenticated
-  }
-
-  watchEffect(async () => {
-    const isAuthenticated = await client.isAuthenticated()
-
-    setIsAuthenticated(isAuthenticated)
-    setLoading(false)
+export const createContext = (logtoClient: LogtoClient): Context => {
+  const context = reactive<LogtoContextProperties>({
+    client: logtoClient,
+    isAuthenticated: false,
+    isLoading: true,
+    error: undefined
   })
 
-  return { ...context, isLoading, setError, setLoading, setIsAuthenticated }
-}
+  const { client, isAuthenticated, isLoading, error } = toRefs(context)
 
-export const throwContextError = (): never => {
-  throw new Error('Must install Logto plugin first.')
+  return {
+    client,
+    isAuthenticated,
+    isLoading,
+    error
+  }
 }
