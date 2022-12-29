@@ -1,5 +1,12 @@
 
 
+### [1.0.9](https://github.com/Hrdtr/nuxt-logto/compare/1.0.8...1.0.9) (2022-12-29)
+
+
+### Bug Fixes
+
+* run handle sign in redirected fn in client only to prevent request doubled ([710a7d6](https://github.com/Hrdtr/nuxt-logto/commit/710a7d6bdc2de1db2a38440d956f684c0652d9dd))
+
 ### [1.0.8](https://github.com/Hrdtr/nuxt-logto/compare/1.0.7...1.0.8) (2022-12-26)
 
 
