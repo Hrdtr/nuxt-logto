@@ -1,5 +1,5 @@
-import { Logto } from '..'
 import { useNuxtApp } from '#app'
+import { Logto } from '..'
 
 /**
  * A composable method that provides the Logto reactive refs and auth methods.

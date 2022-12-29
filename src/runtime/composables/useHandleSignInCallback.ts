@@ -24,8 +24,10 @@ export const useHandleSignInCallback = (callback?: () => void): {
   }
 
   watchEffect(() => {
-    if (!isAuthenticated.value && client.value?.isSignInRedirected(currentPageUrl)) {
-      handleSignInCallback(currentPageUrl, callback)
+    if (process.client) {
+      if (!isAuthenticated.value && client.value?.isSignInRedirected(currentPageUrl)) {
+        handleSignInCallback(currentPageUrl, callback)
+      }
     }
   })
 
