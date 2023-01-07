@@ -1,5 +1,18 @@
 
 
+## [1.1.0](https://github.com/Hrdtr/nuxt-logto/compare/1.0.9...1.1.0) (2023-01-07)
+
+
+### Features
+
+* add clearstorage method ([54e38c7](https://github.com/Hrdtr/nuxt-logto/commit/54e38c75ff40b6a922088d2cf78c017fd3cc8380))
+* add use localstorage as fallback option ([cd0da62](https://github.com/Hrdtr/nuxt-logto/commit/cd0da626b2289f930f06cc79d9acced32a9d834b))
+
+
+### Bug Fixes
+
+* module option types ([7d0daa7](https://github.com/Hrdtr/nuxt-logto/commit/7d0daa768a5003a5cf735bb956cc906f93cc47a8))
+
 ### [1.0.9](https://github.com/Hrdtr/nuxt-logto/compare/1.0.8...1.0.9) (2022-12-29)
 
 
