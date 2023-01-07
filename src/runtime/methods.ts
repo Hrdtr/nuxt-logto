@@ -1,16 +1,17 @@
-import { IdTokenClaims, UserInfoResponse } from '@logto/client'
+import { IdTokenClaims, UserInfoResponse, Storage } from '@logto/client'
 import type { Context } from './context'
 
-export type CreatePluginMethods = (context: Context) => {
+export type CreateMethods = (context: Context, storage: Storage) => {
   signIn: (redirectUri: string) => Promise<void>
   signOut: (postLogoutRedirectUri?: string) => Promise<void>
   fetchUserInfo: () => Promise<UserInfoResponse | undefined>
   getAccessToken: (resource?: string) => Promise<string | undefined>
   getIdTokenClaims: () => Promise<IdTokenClaims | undefined>
-  handleSignInCallback: (callbackUri: string, callbackFunction?: () => void) => Promise<void>
+  handleSignInCallback: (callbackUri: string, callbackFunction?: () => void) => Promise<void>,
+  clearStorage: () => Promise<void>
 }
 
-export const createPluginMethods: CreatePluginMethods = (context: Context) => {
+export const createMethods: CreateMethods = (context, storage) => {
   const throwClientUndefinedError = (): never => {
     throw new Error('Logto client undefined')
   }
@@ -111,12 +112,24 @@ export const createPluginMethods: CreatePluginMethods = (context: Context) => {
     }
   }
 
+  const clearStorage = async () => {
+    try {
+      await storage.removeItem('idToken')
+      await storage.removeItem('accessToken')
+      await storage.removeItem('refreshToken')
+      await storage.removeItem('signInSession')
+    } catch (error: unknown) {
+      setError(error, 'Unexpected error occurred while clearing storage')
+    }
+  }
+
   return {
     signIn,
     signOut,
     fetchUserInfo,
     getAccessToken,
     getIdTokenClaims,
-    handleSignInCallback
+    handleSignInCallback,
+    clearStorage
   }
 }

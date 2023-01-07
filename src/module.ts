@@ -39,8 +39,9 @@ export default defineNuxtModule<ModuleOptions>({
     addPluginTemplate({
       filename: '00.ts',
       getContents: () => `import LogtoClient from '${resolve(runtimeDir, 'client')}'
+      import { readonly } from 'vue'
       import { Context, createContext } from '${resolve(runtimeDir, 'context')}'
-      import { createPlugin } from '${resolve(runtimeDir, 'plugin')}'
+      import { createMethods } from '${resolve(runtimeDir, 'methods')}'
       import { createStorage } from '${resolve(runtimeDir, 'storage')}'
       import { Logto } from '${resolve(runtimeDir)}'
       import { defineNuxtPlugin } from '#app'
@@ -50,8 +51,16 @@ export default defineNuxtModule<ModuleOptions>({
         const storage = createStorage()
         const client = new LogtoClient(config, storage, navigator)
         const context = createContext(client)
-        const logto = createPlugin(context)
-
+        const methods = createMethods(context, storage)
+      
+        const logto: Logto = {
+          client: context.client,
+          isAuthenticated: readonly(context.isAuthenticated),
+          isLoading: readonly(context.isLoading),
+          error: readonly(context.error),
+          ...methods
+        }
+      
         // Get initial state
         const res = await client.isAuthenticated()
         context.isAuthenticated.value = res
@@ -65,7 +74,7 @@ export default defineNuxtModule<ModuleOptions>({
       }
       declare module '@vue/runtime-core' {
         interface ComponentCustomProperties { $logto: Logto, $logtoCtx: Context }
-      }
+      }      
       `
     })
 
