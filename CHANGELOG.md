@@ -1,5 +1,12 @@
 
 
+### [1.1.1](https://github.com/Hrdtr/nuxt-logto/compare/1.1.0...1.1.1) (2023-01-07)
+
+
+### Bug Fixes
+
+* storage option not passed ([5211cd3](https://github.com/Hrdtr/nuxt-logto/commit/5211cd328daa5f5ceb8132914135c92dc4ce908f))
+
 ## [1.1.0](https://github.com/Hrdtr/nuxt-logto/compare/1.0.9...1.1.0) (2023-01-07)
 
 
