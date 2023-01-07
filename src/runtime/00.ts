@@ -15,8 +15,8 @@
 // // import { defineNuxtPlugin } from '#app'
 
 // export default defineNuxtPlugin(async (nuxtApp) => {
-//   const { config, navigator } = nuxtApp.$config.public.logto
-//   const storage = createStorage()
+//   const { config, navigator, useLocalStorageAsFallback } = nuxtApp.$config.public.logto
+//   const storage = createStorage({ useLocalStorageAsFallback })
 //   const client = new LogtoClient(config, storage, navigator)
 //   const context = createContext(client)
 //   const methods = createMethods(context, storage)
