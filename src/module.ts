@@ -1,12 +1,11 @@
 import { fileURLToPath } from 'url'
-import { defineNuxtModule, addPlugin, createResolver, addImportsDir, addPluginTemplate } from '@nuxt/kit'
+import { defineNuxtModule, createResolver, addImportsDir, addPluginTemplate } from '@nuxt/kit'
 import { LogtoConfig } from '@logto/client'
-import { useNuxtApp } from '#app'
 
 export interface ModuleOptions {
   config: LogtoConfig
-  storage?: Storage
-  navigatior?: (url: string) => void | Promise<void>
+  useLocalStorageAsFallback?: boolean
+  navigator?: (url: string) => void | Promise<void>
 }
 
 export default defineNuxtModule<ModuleOptions>({
@@ -26,7 +25,7 @@ export default defineNuxtModule<ModuleOptions>({
     }
 
     nuxt.options.runtimeConfig.public.logto = options
-    nuxt.options.build.transpile.push(runtimeDir, /@logto/, /@silverhand/)
+    nuxt.options.build.transpile.push(runtimeDir, /@logto/, /@silverhand/, 'nanoid', 'zod')
     if (nuxt.options.vite.optimizeDeps?.include) {
       nuxt.options.vite.optimizeDeps.include.push('@logto/client')
     } else {
