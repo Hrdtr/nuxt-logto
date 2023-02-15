@@ -22,22 +22,22 @@
     "release": "release-it"
   },
   "dependencies": {
-    "@logto/client": "1.0.0-beta.14",
-    "@logto/js": "1.0.0-beta.14",
-    "@nuxt/kit": "^3.0.0",
-    "js-base64": "^3.7.3"
+    "@logto/client": "1.0.0-rc.0",
+    "@logto/js": "1.0.0-rc.0",
+    "@nuxt/kit": "^3.2.0",
+    "js-base64": "^3.7.5"
   },
   "devDependencies": {
     "@nuxt/module-builder": "^0.2.1",
-    "@nuxt/schema": "^3.0.0",
+    "@nuxt/schema": "^3.2.0",
     "@nuxtjs/eslint-config-typescript": "^12.0.0",
     "@release-it/conventional-changelog": "^5.1.1",
-    "@types/node": "^18.11.17",
-    "@vue/runtime-core": "^3.2.45",
-    "eslint": "^8.30.0",
-    "nuxt": "^3.0.0",
-    "release-it": "^15.5.1",
-    "typescript": "^4.9.4",
-    "vue": "^3.2.45"
+    "@types/node": "^18.13.0",
+    "@vue/runtime-core": "^3.2.47",
+    "eslint": "^8.34.0",
+    "nuxt": "^3.2.0",
+    "release-it": "^15.6.0",
+    "typescript": "^4.9.5",
+    "vue": "^3.2.47"
   }
 }

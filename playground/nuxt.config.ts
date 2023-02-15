@@ -1,4 +1,3 @@
-import { defineNuxtConfig } from 'nuxt/config'
 import logto from '..'
 
 export default defineNuxtConfig({

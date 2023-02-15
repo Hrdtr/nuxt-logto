@@ -1,6 +1,7 @@
-// import { defineNuxtPlugin } from '#app'
+/* eslint-disable no-console */
+import { defineNuxtPlugin } from '#app'
 
-// export default defineNuxtPlugin(({ $logto }) => {
-//   const { isAuthenticated } = $logto
-//   console.log('isAuthenticated:', isAuthenticated.value)
-// })
+export default defineNuxtPlugin(({ $logto }) => {
+  const { isAuthenticated } = $logto
+  console.log('isAuthenticated:', isAuthenticated.value)
+})
