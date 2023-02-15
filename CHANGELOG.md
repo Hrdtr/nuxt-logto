@@ -1,5 +1,7 @@
 
 
+### [1.1.2](https://github.com/Hrdtr/nuxt-logto/compare/1.1.1...1.1.2) (2023-02-15)
+
 ### [1.1.1](https://github.com/Hrdtr/nuxt-logto/compare/1.1.0...1.1.1) (2023-01-07)
 
 
