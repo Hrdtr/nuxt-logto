@@ -72,7 +72,7 @@ export default defineNuxtModule<ModuleOptions>({
       declare module '#app' {
         interface NuxtApp { $logto: Logto, $logtoCtx: Context }
       }
-      declare module '@vue/runtime-core' {
+      declare module 'vue' {
         interface ComponentCustomProperties { $logto: Logto, $logtoCtx: Context }
       }      
       `
